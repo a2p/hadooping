@@ -61,7 +61,7 @@ Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
     }
 
     file {"oozie-site.xml":
-      name   => "/etc/oozie/conf/oozie-cite.xml",
+      name   => "/etc/oozie/conf/oozie-site.xml",
       owner  => "root",
       group  => "root",
       source => "puppet:///modules/hue_node/etc/oozie/conf/oozie-site.xml",
