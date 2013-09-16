@@ -1,0 +1,7 @@
+node02.localhost
+Deploying CDH4 Hadoop in Pseudo-Distributed Mode
+
+node04.localhost
+Deploying Apache Zookeeper, Apache Oozie, Apache Hue
+
+names of nodes must be defined in /etc/hosts on both nodes
