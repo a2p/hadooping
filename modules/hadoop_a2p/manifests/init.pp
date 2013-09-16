@@ -13,6 +13,7 @@ Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 
     package { "hadoop-0.20-conf-pseudo" :
     ensure => present,
+    require => file["cloudera-cdh4.repo"]
     }
     package { "hue-plugins" :
     ensure => present,
