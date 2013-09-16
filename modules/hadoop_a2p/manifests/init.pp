@@ -16,6 +16,7 @@ Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
     }
     package { "hue-plugins" :
     ensure => present,
+    require => package["hadoop-0.20-conf-pseudo"]
     }
 
     file {"core-site.xml":
