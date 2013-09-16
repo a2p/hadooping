@@ -36,9 +36,9 @@ Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
       owner  => "root",
       group  => "root",
       source => "puppet:///modules/hue_node/etc/hue/hue.ini",
-      before => service ["hue"]
+      before => service ["hue"],
+      require => package ["hue-server"]      
     }
-
 
     service { "zookeeper-server":
       ensure  => running,
