@@ -65,7 +65,8 @@ Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
       owner  => "root",
       group  => "root",
       source => "puppet:///modules/hue_node/etc/oozie/conf/oozie-site.xml",
-      before => service ["oozie"]
+      before => service ["oozie"],
+      require => Package["oozie"]      
     }
     
      service { "hue" :
