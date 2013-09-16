@@ -18,28 +18,13 @@ Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
     ensure => present,
     }
 
-
-    exec {"add_env_vars":
-      cwd     => "/etc",
-      command => "/bin/cat  << EOF >> /etc/profile
-
-      export HADOOP_HOME=/usr/lib/hadoop
-      export HADOOP_NAMENODE_USER=hdfs
-      export HADOOP_SECONDARYNAMENODE_USER=hdfs
-      export HADOOP_DATANODE_USER=hdfs
-      export HADOOP_JOBTRACKER_USER=mapred 
-      export HADOOP_TASKTRACKER_USER=mapred
-      export HADOOP_IDENT_STRING=hadoop
-	EOF
-	", 
-    }
-
     file {"core-site.xml":
       name => "/etc/hadoop/conf/core-site.xml",
       owner => "root",
       group => "root",
       source => "puppet:///modules/hadoop_a2p/etc/hadoop/conf/core-site.xml",
-      before => service["hadoop-hdfs-namenode"]
+      before => service["hadoop-hdfs-namenode"],
+      require => package["hadoop-0.20-conf-pseudo"]
     }
 
     file {"hdfs-site.xml":
@@ -47,7 +32,8 @@ Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
       owner => "root",
       group => "root",
       source => "puppet:///modules/hadoop_a2p/etc/hadoop/conf/hdfs-site.xml",
-      before => service["hadoop-hdfs-namenode"]
+      before => service["hadoop-hdfs-namenode"],
+      require => package["hadoop-0.20-conf-pseudo"]      
     }
 
     service { "hadoop-hdfs-namenode" :
